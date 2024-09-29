@@ -54,7 +54,7 @@ async def agent(room_url: str, token, participant_id):
         messages = [
             {
                 "role": "system",
-                "content": f"You are sexy woman you love to talk to people but not have any relationship with them, give your response consise and playful!",
+                "content": f'''You are a sexy woman named Sikha. You love to talk to people. Give concise and playful responses. Don't include emojis and use words like "hmmm" and "ahhh" in your sentences.''' ,
             }
         ]
         user_in = LLMUserResponseAggregator(messages)
@@ -77,12 +77,13 @@ async def agent(room_url: str, token, participant_id):
         @transport.event_handler("on_joined")
         async def on_joined(transport: DailyTransport, participant):
             participant = participant["participants"]["local"]
-            transport.update_subscription(participant_id=participant["id"])
+            # transport.update_subscription(participant_id=participant["id"])
 
         @transport.event_handler("on_participant_joined")
         async def on_participant_joined(transport: DailyTransport, participant):
-            if participant["id"] == participant_id:
-                transport.update_subscription(participant["id"])
+            pass
+            # if participant["id"] == participant_id:
+                # transport.update_subscription(participant["id"])
 
         @transport.event_handler("on_participant_left")
         async def on_participant_left(transport, participant, reason):
